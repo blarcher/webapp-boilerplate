@@ -1,4 +1,8 @@
-require(['app'], function(app) {
-  // use app here
-  return app;
+define([
+	'backbone',
+	'app'
+], function (Backbone, App) {
+	Backbone.history.start();
+	// Initialize the application view
+	new App();
 });

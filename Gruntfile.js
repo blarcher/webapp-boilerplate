@@ -79,7 +79,7 @@ module.exports = function(grunt) {
             dev: [
                 "app/index.html",
                 "app/styles/css",
-                "app/scripts/templates.js",
+                "app/scripts/templates/compiled",
                 "app/images/gen"
             ],
             test: ["_SpecRunner.html"],
@@ -104,6 +104,8 @@ module.exports = function(grunt) {
                     // requirejs
                     "define": false,
                     "require": false,
+                    // underscore
+                    "_": false,
                     // handlebars, for helpers file
                     "Handlebars": false,
                     // jasmine
@@ -117,14 +119,18 @@ module.exports = function(grunt) {
                     "runs": false,
                     "spyOn": false,
                     "waits": false,
-                    "waitsFor": false
+                    "waitsFor": false,
+                    // builtins
+                    "console": false
                 }
             },
             all: [
                 'Gruntfile.js',
                 'app/scripts/**/*.js',
                 '!app/scripts/lib/**/*.js',
-                '!app/scripts/templates.js',
+                '!app/scripts/handlebars.js',
+                '!app/scripts/templates/compiled/*.js',
+                '!app/scripts/templates/compiled/**/*.js',
                 'test/spec/**/*.js'
             ]
         },
@@ -205,13 +211,14 @@ module.exports = function(grunt) {
         handlebars: {
             compile: {
                 options: {
-                    processName: function (filename) {
-                        return filename.replace('app/scripts/templates/', '');
-                    }
+                    amd: true,
+                    namespace: false
                 },
-                files: {
-                    'app/scripts/templates.js': 'app/scripts/templates/**/*.hbs'
-                }
+                expand: true,
+                cwd: 'app/scripts/templates/',
+                src: '**/*.hbs',
+                dest: 'app/scripts/templates/compiled/',
+                ext: '.js'
             }
         },
         concat: {
@@ -223,9 +230,9 @@ module.exports = function(grunt) {
                 src: [
                     'app/scripts/lib/handlebars.runtime.js',
                     'app/scripts/templates/helpers.js',
-                    'app/scripts/templates.js'
+                    'app/scripts/handlebars.js'
                 ],
-                dest: 'app/scripts/templates.js'
+                dest: 'app/scripts/handlebars.js'
             },
             js: {
                 src: [
