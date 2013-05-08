@@ -132,7 +132,6 @@ module.exports = function(grunt) {
                 'app/scripts/**/*.js',
                 '!app/scripts/lib/**/*.js',
                 '!app/scripts/handlebars.js',
-                '!app/scripts/templates/compiled/*.js',
                 '!app/scripts/templates/compiled/**/*.js',
                 'test/spec/**/*.js'
             ]
