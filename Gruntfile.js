@@ -139,7 +139,7 @@ module.exports = function(grunt) {
                 dest: 'dist/release/styles/css/main.css'
             }
         },
-        mincss: {
+        cssmin: {
             dist: {
                 files: {
                     'dist/release/styles/css/main.css': [
@@ -189,7 +189,7 @@ module.exports = function(grunt) {
         'contrib-htmlmin',
         'contrib-jasmine',
         'contrib-jshint',
-        'contrib-mincss',
+        'contrib-cssmin',
         'contrib-requirejs',
         'contrib-uglify',
         'contrib-watch'
