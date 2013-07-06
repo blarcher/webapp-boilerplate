@@ -138,7 +138,7 @@ module.exports = function(grunt) {
         },
         jasmine: {
             custom: {
-                src: ['app/scripts/main.js'],
+                src: ['main.js'],
                 options: {
                     specs: ['test/spec/**/*.js'],
                     host: 'http://127.0.0.1:<%= connect.test.options.port %>/',
@@ -163,15 +163,21 @@ module.exports = function(grunt) {
             }
         },
         compass: {
+            options: {
+                httpPath: '/',
+                cssDir: 'app/styles/css',
+                sassDir: 'app/styles/sass',
+                imagesDir: 'app/images',
+                generatedImagesDir: 'app/images/gen',
+                httpImagesPath: '/images/',
+                httpGeneratedImagesPath: '/images/gen'
+            },
             dist: {
-                // Merged with defaults from config.rb. Overrides here win out.
                 options: {
                     cssDir: 'dist/build/css'
                 }
             },
-            dev: {
-                // Use defaults from config.rb.
-            }
+            dev: {}
         },
         replace: {
             options: {
