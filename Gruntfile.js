@@ -73,6 +73,13 @@ module.exports = function(grunt) {
                 options: {
                     forceWatchMethod: 'old'
                 }
+            },
+            html: {
+                files: ['html/**/*.html'],
+                tasks: ['replace:dev'],
+                options: {
+                    forceWatchMethod: 'old'
+                }
             }
         },
         clean: {
@@ -104,8 +111,6 @@ module.exports = function(grunt) {
                     // requirejs
                     "define": false,
                     "require": false,
-                    // underscore
-                    "_": false,
                     // handlebars, for helpers file
                     "Handlebars": false,
                     // jasmine
@@ -119,9 +124,7 @@ module.exports = function(grunt) {
                     "runs": false,
                     "spyOn": false,
                     "waits": false,
-                    "waitsFor": false,
-                    // builtins
-                    "console": false
+                    "waitsFor": false
                 }
             },
             all: [
@@ -129,14 +132,13 @@ module.exports = function(grunt) {
                 'app/scripts/**/*.js',
                 '!app/scripts/lib/**/*.js',
                 '!app/scripts/handlebars.js',
-                '!app/scripts/templates/compiled/*.js',
                 '!app/scripts/templates/compiled/**/*.js',
                 'test/spec/**/*.js'
             ]
         },
         jasmine: {
             custom: {
-                src: ['app/scripts/main.js'],
+                src: ['main.js'],
                 options: {
                     specs: ['test/spec/**/*.js'],
                     host: 'http://127.0.0.1:<%= connect.test.options.port %>/',
@@ -161,15 +163,21 @@ module.exports = function(grunt) {
             }
         },
         compass: {
+            options: {
+                httpPath: '/',
+                cssDir: 'app/styles/css',
+                sassDir: 'app/styles/sass',
+                imagesDir: 'app/images',
+                generatedImagesDir: 'app/images/gen',
+                httpImagesPath: '/images/',
+                httpGeneratedImagesPath: '/images/gen'
+            },
             dist: {
-                // Merged with defaults from config.rb. Overrides here win out.
                 options: {
                     cssDir: 'dist/build/css'
                 }
             },
-            dev: {
-                // Use defaults from config.rb.
-            }
+            dev: {}
         },
         replace: {
             options: {
@@ -229,8 +237,7 @@ module.exports = function(grunt) {
             handlebars: {
                 src: [
                     'app/scripts/lib/handlebars.runtime.js',
-                    'app/scripts/templates/helpers.js',
-                    'app/scripts/handlebars.js'
+                    'app/scripts/templates/helpers.js'
                 ],
                 dest: 'app/scripts/handlebars.js'
             },
