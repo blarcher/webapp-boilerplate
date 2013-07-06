@@ -81,10 +81,7 @@ module.exports = function(grunt) {
         },
         jasmine: {
             custom: {
-                src: [
-                    'app/scripts/**/*.js',
-                    '!app/scripts/lib/**/*.js'
-                ],
+                src: ['main.js'],
                 options: {
                     specs: 'test/spec/**/*.js',
                     host: 'http://127.0.0.1:<%= connect.test.options.port %>/',
