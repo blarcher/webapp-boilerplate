@@ -6,3 +6,13 @@ $color: #00c;
 * {
 	color: $color;
 }
+
+.container {
+	width: 1000px;
+	background-color: blue;
+	border-style: dashed;
+	border-color:yellow;
+	left: 50%;
+	text-align: center;
+	padding:50px;
+}
